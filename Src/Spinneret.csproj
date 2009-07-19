@@ -85,4 +85,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+xcopy /y /i $(ProjectDir)Static\* $(TargetDir)Static\</PostBuildEvent>
+  </PropertyGroup>
 </Project>
