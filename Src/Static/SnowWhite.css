@@ -1,0 +1,198 @@
+/*
+SnowWhite.css - for use by SnowWhiteLayout of Spinneret.
+Copyright (C) 2009 Roman Starkov
+$Id: $, $Change: $
+*/
+
+/*
+Color scheme for copy & pasting:
+
+red:
+  border: 1px solid red;
+  background: #fca;
+
+blue:
+  border: 1px solid #25f;
+  background: #acf;
+
+green:
+  border: 1px solid #0c0;
+  background: #cfa;
+*/
+
+/* ===== GENERAL ===== */
+
+body {
+    font-family: "Segoe UI" , "Verdana";
+    background: #fff;
+    color: #000;
+    padding: 0;
+    padding-bottom: 1em;
+    margin: 0;
+}
+
+h1 {
+    font-size: 150%;
+    border-bottom: 1px solid red;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid red;
+}
+
+img {
+    border: none;
+}
+
+p {
+}
+
+pre {
+    color: #b21;
+    padding-left: 2em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px dotted #88a;
+    padding: 0.1em 0.3em;
+    vertical-align: top;
+}
+
+a:hover {
+    color: #00f;
+    background: #ccf;
+    text-decoration: none;
+    border-top: 1px dotted blue;
+    border-bottom: 1px dotted blue;
+}
+
+/* ===== SNOWWHITE ELEMENTS ===== */
+
+body.sw-full-screen {
+    padding: 0 1em;
+    padding-bottom: 1em;
+}
+
+table.sw-layout {
+    width: 100%;
+    border-style: none;
+    padding: 1em;
+    padding-top: 0;
+}
+
+td.sw-layout-leftpane {
+    width: 10em;
+    border-style: none;
+    border-right: 1px solid #aaf;
+    padding: 1em;
+    padding-top: 0;
+}
+
+p.sw-topleft-title {
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #0c0;
+    background: #cfa;
+}
+
+p.sw-topleft-title a {
+    text-decoration: none;
+}
+
+td.sw-layout-leftpane h2 {
+    font-size: 11pt;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    padding-left: 0.3em;
+    border: 1px solid #25f;
+    background: #acf;
+}
+
+td.sw-layout-leftpane ul {
+    font-size: 10pt;
+    margin-top: 0;
+    margin-bottom: 1.6em;
+    padding-left: 1em;
+}
+
+td.sw-layout-mainpane {
+    padding-left: 1em;
+    border-style: none;
+}
+
+div.sw-fullscreen-link {
+    float: right;
+}
+
+ul.sw-exception {
+    font-family: "Consolas" , "Courier New";
+    font-size: 10pt;
+}
+
+/* ===== REPORTTABLE ELEMENTS ===== */
+
+table.rt-noborder, table.rt-noborder tr, table.rt-noborder tr td {
+    border: none;
+}
+p.rt-info {
+    font-style: italic;
+}
+
+/* Rows */
+tr.rt-row-header {
+    background: #58d;
+    color: #fff;
+}
+tr.rt-row-header td {
+    border: 1px solid black;
+    white-space: pre;
+}
+tr.rt-row-even td {
+    background: #fff;
+}
+tr.rt-row-odd td {
+    background: #ddf;
+}
+tr.rt-row-depth-0 td {
+    border-top: 3px solid #000;
+    background: #fcc;
+}
+tr.rt-row-depth-1 {
+    border-top: 3px solid #000;
+}
+tr.rt-row-depth-1 td {
+    font-weight: bold;
+}
+tr.rt-row-depth-1 td {
+    color: #22f;
+}
+tr.rt-row-depth-2 td {
+    color: #d22;
+}
+tr.rt-row-depth-3 td {
+    color: #a2a;
+}
+
+/* Values */
+span.rt-null {
+    font-style: italic;
+    color: #080;
+}
+.rt-num-zero, .rt-num-pos, .rt-num-neg {
+    text-align: right;
+    white-space: nowrap;
+}
+td.rt-num-zero {
+    color: black !important;
+}
+td.rt-num-pos, td.rt-num-pos a {
+    color: black;
+}
+td.rt-num-neg, td.rt-num-neg a {
+    color: #c21;
+}
