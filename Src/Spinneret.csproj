@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportTable.cs" />
     <Compile Include="SnowWhite.cs" />
+    <Compile Include="SpinneretInterface.cs" />
     <Compile Include="SpinneretLayout.cs" />
     <Compile Include="SpinneretPage.cs" />
-    <Compile Include="SpinneretWebInterface.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>

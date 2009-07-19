@@ -8,9 +8,9 @@ namespace RT.Spinneret
 {
     public abstract class SnowWhiteLayout : SpinneretLayout
     {
-        protected readonly SpinneretWebInterface Interface;
+        protected readonly SpinneretInterface Interface;
 
-        public SnowWhiteLayout(SpinneretWebInterface iface)
+        public SnowWhiteLayout(SpinneretInterface iface)
         {
             Interface = iface;
         }

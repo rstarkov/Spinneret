@@ -9,7 +9,7 @@ namespace RT.Spinneret
     /// <summary>
     /// Implements a web interface to an application.
     /// </summary>
-    public class SpinneretWebInterface
+    public class SpinneretInterface
     {
         /// <summary>
         /// Gets the <see cref="HttpServer"/> instance used by the web interface.
@@ -35,7 +35,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Creates and initialises a new web interface.
         /// </summary>
-        public SpinneretWebInterface()
+        public SpinneretInterface()
         {
             NavLinksUser = new List<NavLink>();
         }

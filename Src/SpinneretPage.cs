@@ -18,7 +18,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Stores the web interface instance by which this request was created.
         /// </summary>
-        protected readonly SpinneretWebInterface Interface;
+        protected readonly SpinneretInterface Interface;
 
         /// <summary>
         /// True if the page is being rendered full-screen.
@@ -46,7 +46,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Constructs a page, storing a reference to the request that has caused it.
         /// </summary>
-        protected SpinneretPage(HttpRequest request, SpinneretWebInterface @interface)
+        protected SpinneretPage(HttpRequest request, SpinneretInterface @interface)
         {
             Request = request;
             Interface = @interface;
