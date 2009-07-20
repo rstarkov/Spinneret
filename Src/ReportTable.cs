@@ -221,6 +221,7 @@ namespace RT.Spinneret
     {
         private HttpRequest _request;
         private IQueryable _items;
+        private Dictionary<string, object> _externals;
         private bool _initialised = false;
         private List<string> _cols = new List<string>();
         Dictionary<string, object> _memberInfos = new Dictionary<string, object>();
@@ -238,10 +239,30 @@ namespace RT.Spinneret
         public string DefaultWhere = "";
         public string DefaultOrderBy = "";
 
+        /// <summary>
+        /// Instantiates a report table.
+        /// </summary>
+        /// <param name="request">The request that this table is generated in response to. Used for constructing
+        /// URLs for form action and possibly other items.</param>
+        /// <param name="items">The collection of items to be made queryable.</param>
         public ReportTableQueryable(HttpRequest request, IQueryable<T> items)
         {
             _request = request;
             _items = items;
+        }
+
+        /// <summary>
+        /// Instantiates a report table.
+        /// </summary>
+        /// <param name="request">The request that this table is generated in response to. Used for constructing
+        /// URLs for form action and possibly other items.</param>
+        /// <param name="items">The collection of items to be made queryable.</param>
+        /// <param name="externals">A collection of extra objects to be available under the specified names.
+        /// Supported types: delegates returning a value; typeof(&lt;a-static-type&gt;).</param>
+        public ReportTableQueryable(HttpRequest request, IQueryable<T> items, Dictionary<string, object> externals)
+            : this(request, items)
+        {
+            _externals = externals;
         }
 
         private void initialise()
@@ -285,7 +306,6 @@ namespace RT.Spinneret
             }
 
             Dictionary<string, object> externals = new Dictionary<string, object>();
-            //externals["ut"] = typeof(DynamicUtils);
             externals["str"] = (Expression<Func<object, string>>) (x => x == null ? null : x.ToString());
             externals["stre"] = (Expression<Func<object, string>>) (x => x == null ? "" : x.ToString());
             externals["bool"] = (Expression<Func<object, bool?>>) (x => RConvert.ExactToNullable.Bool(x));
@@ -293,6 +313,9 @@ namespace RT.Spinneret
             externals["decimal"] = (Expression<Func<object, decimal?>>) (x => RConvert.ExactToNullable.Decimal(x));
             externals["double"] = (Expression<Func<object, double?>>) (x => RConvert.ExactToNullable.Double(x));
             externals["datetime"] = (Expression<Func<object, DateTime?>>) (x => RConvert.ExactToNullable.DateTime(x));
+            if (_externals != null)
+                foreach (var kvp in _externals)
+                    externals.Add(kvp.Key, kvp.Value);
 
             if (_select != null)
             {
@@ -405,16 +428,5 @@ namespace RT.Spinneret
                 yield return rowstr.ToString();
             }
         }
-
-        //private static class DynamicUtils
-        //{
-        //    public static string age<U>(GameFact<U> fact)
-        //    {
-        //        if (fact.Known)
-        //            return fact.Timestamp.ToAgoString();
-        //        else
-        //            return null;
-        //    }
-        //}
     }
 }
