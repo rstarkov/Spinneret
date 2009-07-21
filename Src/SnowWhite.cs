@@ -15,7 +15,7 @@ namespace RT.Spinneret
             Interface = iface;
         }
 
-        private Tag makePage(SpinneretPage page, string title, object content)
+        protected Tag MakePage(SpinneretPage page, string title, object content)
         {
             var head = new HEAD(
                 new TITLE(FormatHtmlTitle(title)),
@@ -43,12 +43,12 @@ namespace RT.Spinneret
 
         public override Tag GetPageHtml(SpinneretPage page)
         {
-            return makePage(page, page.GetTitle(), page.GetContent());
+            return MakePage(page, page.GetTitle(), page.GetContent());
         }
 
         public override Tag GetErrorHtml(SpinneretPage page, string message)
         {
-            return makePage(page, "Error", new object[]
+            return MakePage(page, "Error", new object[]
             {
                 new H1("Error") { class_ = "sw-error" },
                 new DIV(message) { class_ = "sw-error" }
@@ -65,7 +65,7 @@ namespace RT.Spinneret
                 result.Add(new UL() { class_ = "sw-exception" }._(exception.StackTrace.Split('\n').Select(x => (object) new LI(x))));
                 exception = exception.InnerException;
             }
-            return makePage(page, "Exception", result);
+            return MakePage(page, "Exception", result);
         }
 
         protected abstract object GetHomeLinkBody();

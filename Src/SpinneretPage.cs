@@ -23,7 +23,7 @@ namespace RT.Spinneret
         /// <summary>
         /// True if the page is being rendered full-screen.
         /// </summary>
-        public bool FullScreen { get; protected set; }
+        public bool FullScreen { get; set; }
 
         /// <summary>
         /// Lists the names of all url arguments which are to be automatically turned into cookies.
