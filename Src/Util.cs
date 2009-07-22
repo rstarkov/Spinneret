@@ -133,6 +133,11 @@ namespace RT.Spinneret
     {
         private IEnumerable<string> _content;
 
+        public RAWHTML(string content)
+        {
+            _content = new string[] { content };
+        }
+
         public RAWHTML(IEnumerable<string> content)
         {
             _content = content;
