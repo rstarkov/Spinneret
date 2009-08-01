@@ -1,7 +1,7 @@
 /*
 SnowWhite.css - for use by SnowWhiteLayout of Spinneret.
 Copyright (C) 2009 Roman Starkov
-$Id: //depot/main/common/Spinneret/Static/SnowWhite.css#2 $, $Change: 1101 $
+$Id: //depot/main/common/Spinneret/Static/SnowWhite.css#3 $, $Change: 1125 $
 */
 
 /*
@@ -125,7 +125,7 @@ td.sw-layout-mainpane {
     border-style: none;
 }
 
-div.sw-fullscreen-link {
+div.sw-floating-links {
     float: right;
 }
 

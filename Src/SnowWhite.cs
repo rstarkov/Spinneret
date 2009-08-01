@@ -31,7 +31,9 @@ namespace RT.Spinneret
                         GetNavPanelBottom(page)
                     ),
                     new TD() { class_ = "sw-layout-mainpane" }._(
-                        new DIV() { class_ = "sw-fullscreen-link" }._(new A("Full screen") { href = page.Request.SameUrlExceptSet("FullScreen", "true") }),
+                        new DIV() { class_ = "sw-floating-links" }._(
+                            GetFloatingLinks(page).SelectMany(a => new object[] { " • ", a }).Skip(1)
+                        ),
                         new H1(title),
                         content
                     )
@@ -75,6 +77,11 @@ namespace RT.Spinneret
             return "/Static/SnowWhite.css";
         }
 
+        protected virtual IEnumerable<A> GetFloatingLinks(SpinneretPage page)
+        {
+            yield return new A("Full screen") { href = page.Request.SameUrlExceptSet("FullScreen", "true") };
+        }
+
         protected virtual string FormatHtmlTitle(string title)
         {
             return title;
@@ -91,7 +98,7 @@ namespace RT.Spinneret
 
         private IEnumerable<object> getNavLinks(SpinneretPage page)
         {
-            IList<NavLink> temp;
+            IEnumerable<NavLink> temp;
             List<NavLink> links = new List<NavLink>();
             links.AddRange(Interface.NavLinksPages);
             temp = Interface.NavLinksUser;
@@ -121,7 +128,10 @@ namespace RT.Spinneret
                         if (links[i].Section != curSection)
                             anyUndone = true;
                         else
+                        {
                             list.Add(new LI(new A(links[i].Text) { href = links[i].Href }));
+                            done[i] = true;
+                        }
                     }
                 }
 

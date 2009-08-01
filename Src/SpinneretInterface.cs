@@ -30,14 +30,13 @@ namespace RT.Spinneret
         /// <summary>
         /// Gets the collection of navigation links defined by the user.
         /// </summary>
-        public List<NavLink> NavLinksUser { get; set; }
+        public virtual IEnumerable<NavLink> NavLinksUser { get { yield break; } }
 
         /// <summary>
         /// Creates and initialises a new web interface.
         /// </summary>
         public SpinneretInterface()
         {
-            NavLinksUser = new List<NavLink>();
         }
 
         /// <summary>
