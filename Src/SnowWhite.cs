@@ -23,21 +23,23 @@ namespace RT.Spinneret
             );
 
             var body = new BODY() { class_ = page.FullScreen ? "sw-full-screen" : null }._(
-                new TABLE() { class_ = "sw-layout" }._(new TR() { class_ = "sw-layout" }._(
-                    new TD() { class_ = "sw-layout-leftpane" }._(
-                        new P(new A(GetHomeLinkBody()) { href = "/" }) { class_ = "sw-topleft-title" },
-                        GetNavPanelTop(page),
-                        GetNavLinks(page),
-                        GetNavPanelBottom(page)
-                    ),
-                    new TD() { class_ = "sw-layout-mainpane" }._(
-                        new DIV() { class_ = "sw-floating-links" }._(
-                            GetFloatingLinks(page).SelectMany(a => new object[] { " • ", a }).Skip(1)
+                page.FullScreen
+                    ? (object) new object[] { new H1(title), content }
+                    : new TABLE() { class_ = "sw-layout" }._(new TR() { class_ = "sw-layout" }._(
+                        new TD() { class_ = "sw-layout-leftpane" }._(
+                            new P(new A(GetHomeLinkBody()) { href = "/" }) { class_ = "sw-topleft-title" },
+                            GetNavPanelTop(page),
+                            GetNavLinks(page),
+                            GetNavPanelBottom(page)
                         ),
-                        new H1(title),
-                        content
-                    )
-                ))
+                        new TD() { class_ = "sw-layout-mainpane" }._(
+                            new DIV() { class_ = "sw-floating-links" }._(
+                                GetFloatingLinks(page).SelectMany(a => new object[] { " • ", a }).Skip(1)
+                            ),
+                            new H1(title),
+                            content
+                        )
+                    ))
             );
 
             return new HTML(head, body);
