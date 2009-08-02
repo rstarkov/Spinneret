@@ -1,7 +1,7 @@
 /*
 SnowWhite.css - for use by SnowWhiteLayout of Spinneret.
 Copyright (C) 2009 Roman Starkov
-$Id: //depot/main/common/Spinneret/Static/SnowWhite.css#3 $, $Change: 1125 $
+$Id: //depot/main/common/Spinneret/Static/SnowWhite.css#4 $, $Change: 1128 $
 */
 
 /*
@@ -183,7 +183,7 @@ span.rt-null {
     font-style: italic;
     color: #080;
 }
-.rt-num-zero, .rt-num-pos, .rt-num-neg {
+td.rt-num-zero, td.rt-num-pos, td.rt-num-neg {
     text-align: right;
     white-space: nowrap;
 }
@@ -191,8 +191,8 @@ td.rt-num-zero {
     color: black !important;
 }
 td.rt-num-pos, td.rt-num-pos a {
-    color: black;
+    color: black !important;
 }
 td.rt-num-neg, td.rt-num-neg a {
-    color: #c21;
+    color: #c21 !important;
 }
