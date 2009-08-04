@@ -77,7 +77,7 @@ namespace RT.Spinneret
             if (_rows.Count == 0)
                 return new P("There are no items to show.") { class_ = "rt-info" };
 
-            HtmlPrinter prn = new HtmlPrinter(new TABLE() { class_ = "rt-table" });
+            List<Tag> rows = new List<Tag>();
 
             int rownum = 0;
             int nextHeader = 0;
@@ -86,10 +86,8 @@ namespace RT.Spinneret
             {
                 if (nextHeader <= rownum && (row.Depth < lastDepth || row.Depth < 0))
                 {
-                    prn.OpenTag(new TR() { class_ = "rt-row-header" });
-                    foreach (var col in Cols)
-                        prn.AddTag(new TD(col.Title) { class_ = MakeCssClass(col.CssClass) });
-                    prn.CloseTag();
+                    rows.Add(new TR() { class_ = "rt-row-header" }._(Cols.Select(col =>
+                        new TD(col.Title) { class_ = MakeCssClass(col.CssClass) })));
                     nextHeader = rownum + 30;
                 }
 
@@ -97,22 +95,21 @@ namespace RT.Spinneret
                     row.CssClass,
                     rownum % 2 == 0 ? "rt-row-even" : "rt-row-odd",
                     row.Depth >= 0 ? " rt-row-depth-" + row.Depth : null);
-                prn.OpenTag(new TR() { class_ = rowcss });
-                foreach (var col in _cols)
+
+                rows.Add(new TR() { class_ = rowcss }._(_cols.Select(col =>
                 {
                     var val = row[col];
                     if (val == null)
-                        prn.AddTag(new TD() { class_ = MakeCssClass(col.CssClass) });
+                        return new TD() { class_ = MakeCssClass(col.CssClass) };
                     else
-                        prn.AddTag(new TD(val.Content) { class_ = MakeCssClass(col.CssClass, val.CssClass) });
-                }
-                prn.CloseTag();
+                        return new TD(val.Content) { class_ = MakeCssClass(col.CssClass, val.CssClass) };
+                })));
 
                 lastDepth = row.Depth;
                 rownum++;
             }
 
-            return prn.GetHtml();
+            return new TABLE(rows) { class_ = "rt-table" };
         }
 
         public string MakeCssClass(params string[] classes)
