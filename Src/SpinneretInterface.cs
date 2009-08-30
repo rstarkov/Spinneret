@@ -72,7 +72,7 @@ namespace RT.Spinneret
         {
             if (Server == null)
                 return;
-            if (Server.IsListening)
+            if (Server.IsListeningThreadActive)
                 Server.StopListening(true);
             Server = null;
         }
@@ -82,7 +82,7 @@ namespace RT.Spinneret
         /// </summary>
         public bool ServerRunning
         {
-            get { return Server != null && Server.IsListening; }
+            get { return Server != null && Server.IsListeningThreadActive; }
         }
 
         /// <summary>
