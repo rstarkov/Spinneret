@@ -86,6 +86,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
-xcopy /y /i $(ProjectDir)Static\* $(TargetDir)Static\</PostBuildEvent>
+xcopy /y /i $(ProjectDir)Static\* $(TargetDir)Static\
+rd /s /q $(ProjectDir)obj</PostBuildEvent>
   </PropertyGroup>
 </Project>
