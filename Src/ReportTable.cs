@@ -96,9 +96,10 @@ namespace RT.Spinneret
                     rownum % 2 == 0 ? "rt-row-even" : "rt-row-odd",
                     row.Depth >= 0 ? " rt-row-depth-" + row.Depth : null);
 
+                var rowInner = row;
                 rows.Add(new TR() { class_ = rowcss }._(_cols.Select(col =>
                 {
-                    var val = row[col];
+                    var val = rowInner[col];
                     if (val == null)
                         return new TD() { class_ = MakeCssClass(col.CssClass) };
                     else
