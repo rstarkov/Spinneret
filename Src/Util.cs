@@ -25,8 +25,8 @@ namespace RT.Spinneret
                 throw new ValidationException(varName, "<none>", "specified");
 
             T value;
-            try { value = RConvert.Exact<T>(request.Get[varName][0]); }
-            catch (RConvertException) { throw new ValidationException(varName, request.Get[varName][0], "convertible to {0}".Fmt(typeof(T))); }
+            try { value = ExactConvert.To<T>(request.Get[varName][0]); }
+            catch (ExactConvertException) { throw new ValidationException(varName, request.Get[varName][0], "convertible to {0}".Fmt(typeof(T))); }
 
             if (!validator(value))
                 throw new ValidationException(varName, request.Get[varName][0], mustBe);
@@ -45,8 +45,8 @@ namespace RT.Spinneret
                 return varDefault;
 
             T value;
-            try { value = RConvert.Exact<T>(request.Get[varName][0]); }
-            catch (RConvertException) { throw new ValidationException(varName, request.Get[varName][0], "convertible to {0}".Fmt(typeof(T))); }
+            try { value = ExactConvert.To<T>(request.Get[varName][0]); }
+            catch (ExactConvertException) { throw new ValidationException(varName, request.Get[varName][0], "convertible to {0}".Fmt(typeof(T))); }
 
             if (!validator(value))
                 throw new ValidationException(varName, request.Get[varName][0], mustBe);

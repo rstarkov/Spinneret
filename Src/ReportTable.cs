@@ -306,11 +306,11 @@ namespace RT.Spinneret
             Dictionary<string, object> externals = new Dictionary<string, object>();
             externals["str"] = (Expression<Func<object, string>>) (x => x == null ? null : x.ToString());
             externals["stre"] = (Expression<Func<object, string>>) (x => x == null ? "" : x.ToString());
-            externals["bool"] = (Expression<Func<object, bool?>>) (x => RConvert.ExactToNullable.Bool(x));
-            externals["int"] = (Expression<Func<object, int?>>) (x => RConvert.ExactToNullable.Int(x));
-            externals["decimal"] = (Expression<Func<object, decimal?>>) (x => RConvert.ExactToNullable.Decimal(x));
-            externals["double"] = (Expression<Func<object, double?>>) (x => RConvert.ExactToNullable.Double(x));
-            externals["datetime"] = (Expression<Func<object, DateTime?>>) (x => RConvert.ExactToNullable.DateTime(x));
+            externals["bool"] = (Expression<Func<object, bool?>>) (x => ExactConvert.ToNullable.Bool(x));
+            externals["int"] = (Expression<Func<object, int?>>) (x => ExactConvert.ToNullable.Int(x));
+            externals["decimal"] = (Expression<Func<object, decimal?>>) (x => ExactConvert.ToNullable.Decimal(x));
+            externals["double"] = (Expression<Func<object, double?>>) (x => ExactConvert.ToNullable.Double(x));
+            externals["datetime"] = (Expression<Func<object, DateTime?>>) (x => ExactConvert.ToNullable.DateTime(x));
             if (_externals != null)
                 foreach (var kvp in _externals)
                     externals.Add(kvp.Key, kvp.Value);
