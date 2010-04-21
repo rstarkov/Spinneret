@@ -101,7 +101,7 @@ namespace RT.Spinneret
         /// </summary>
         public virtual void RegisterHandlers()
         {
-            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook("/Static", req => Server.FileSystemResponse("Static", req)));
+            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(req => Server.FileSystemResponse("Static", req), path: "/Static"));
         }
 
         /// <summary>
@@ -130,8 +130,8 @@ namespace RT.Spinneret
         /// that request.</param>
         public void RegisterPage(string baseUrl, Func<HttpRequest, SpinneretPage> pageMaker)
         {
-            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(null, null, baseUrl, false, baseUrl.EndsWith("/"),
-                request => handler_Page(request, pageMaker)));
+            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(path: baseUrl, specificPath: baseUrl.EndsWith("/"),
+                handler: request => handler_Page(request, pageMaker)));
         }
 
         /// <summary>
