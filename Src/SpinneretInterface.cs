@@ -54,6 +54,7 @@ namespace RT.Spinneret
             {
                 Server = new HttpServer(options);
                 Server.StartListening(false);
+                _navLinksPages.Clear();
                 RegisterHandlers();
             }
             catch
