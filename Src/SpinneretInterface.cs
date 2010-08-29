@@ -45,17 +45,17 @@ namespace RT.Spinneret
         /// warning to the user that the server could not be started. The outcome can be
         /// determined via <see cref="ServerRunning"/>.
         /// </summary>
-        public void StartServer(HttpServerOptions options)
+        public void StartServer(HttpServerOptions hsOptions, FileSystemOptions fsOptions = null)
         {
             if (ServerRunning)
                 StopServer();
 
             try
             {
-                Server = new HttpServer(options);
+                Server = new HttpServer(hsOptions);
                 Server.StartListening(false);
                 _navLinksPages.Clear();
-                RegisterHandlers();
+                RegisterHandlers(fsOptions);
             }
             catch
             {
@@ -100,9 +100,13 @@ namespace RT.Spinneret
         /// own handlers (via <see cref="Server.RequestHandlerHooks.Add"/>) or pages (via <see cref="RegisterPage"/>),
         /// but remember to call the base method to register some shared handlers.
         /// </summary>
-        public virtual void RegisterHandlers()
+        public virtual void RegisterHandlers(FileSystemOptions fsOptions)
         {
-            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(req => Server.FileSystemResponse("Static", req), path: "/Static"));
+            if (fsOptions != null)
+            {
+                FileSystemHandler fileHandler = new FileSystemHandler("Static", fsOptions);
+                Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(fileHandler.Handle, path: "/Static"));
+            }
         }
 
         /// <summary>
@@ -147,7 +151,7 @@ namespace RT.Spinneret
         private HttpResponse handler_Page(HttpRequest request, Func<HttpRequest, SpinneretPage> pageMaker)
         {
             if (!ValidateAccessRights(request))
-                return HttpServer.ErrorResponse(HttpStatusCode._403_Forbidden);
+                return HttpResponse.Error(HttpStatusCode._403_Forbidden);
 
             var page = pageMaker(request);
             var response = page.ParseArgs();
@@ -155,15 +159,15 @@ namespace RT.Spinneret
 
             try
             {
-                return new HttpResponse(page.Layout.GetPageHtml(page));
+                return HttpResponse.Create(page.Layout.GetPageHtml(page));
             }
             catch (PageErrorException exc)
             {
-                return new HttpResponse(page.Layout.GetErrorHtml(page, exc.Message), exc.Status);
+                return HttpResponse.Create(page.Layout.GetErrorHtml(page, exc.Message), exc.Status);
             }
             catch (Exception e)
             {
-                return new HttpResponse(page.Layout.GetExceptionHtml(page, e), HttpStatusCode._500_InternalServerError);
+                return HttpResponse.Create(page.Layout.GetExceptionHtml(page, e), HttpStatusCode._500_InternalServerError);
             }
         }
     }

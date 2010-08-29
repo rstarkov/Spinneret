@@ -78,15 +78,11 @@ namespace RT.Spinneret
                     }
                 }
                 if (cookies != null)
-                    return new HttpResponse()
+                    return HttpResponse.Create(HttpStatusCode._302_Found, new HttpResponseHeaders()
                     {
-                        Status = HttpStatusCode._302_Found,
-                        Headers = new HttpResponseHeaders()
-                        {
-                            SetCookie = cookies,
-                            Location = Request.SameUrlWhere(key => !CookiableArgs.Contains(key))
-                        }
-                    };
+                        SetCookie = cookies,
+                        Location = Request.SameUrlWhere(key => !CookiableArgs.Contains(key))
+                    });
             }
 
             FullScreen = Request.GetValidated("FullScreen", false);
