@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RT.TagSoup;
 using RT.TagSoup.HtmlTags;
+using RT.Util.ExtensionMethods;
 
 namespace RT.Spinneret
 {
@@ -34,7 +35,7 @@ namespace RT.Spinneret
                         ),
                         new TD() { class_ = "sw-layout-mainpane" }._(
                             new DIV() { class_ = "sw-floating-links" }._(
-                                GetFloatingLinks(page).SelectMany(a => new object[] { " • ", a }).Skip(1)
+                                GetFloatingLinks(page).InsertBetween<object>(" • ")
                             ),
                             new H1(title),
                             content
