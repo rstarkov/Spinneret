@@ -62,7 +62,7 @@ namespace RT.Spinneret
                 try { Server.StopListening(true); }
                 catch { }
                 Server = null;
-                DlgMessage.ShowWarning("The server could not be started. Try a different port (current port is {0}).".Fmt(Server.Options.Port));
+                DlgMessage.ShowWarning("The server could not be started. Try a different port (current port is {0}).".Fmt(hsOptions.Port));
             }
         }
 
@@ -102,11 +102,11 @@ namespace RT.Spinneret
         /// </summary>
         public virtual void RegisterHandlers(FileSystemOptions fsOptions)
         {
-            if (fsOptions != null)
-            {
-                FileSystemHandler fileHandler = new FileSystemHandler("Static", fsOptions);
-                Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(fileHandler.Handle, path: "/Static"));
-            }
+            if (fsOptions == null)
+                throw new ArgumentException("FileSystemOptions can't be null");
+
+            FileSystemHandler fileHandler = new FileSystemHandler("Static", fsOptions);
+            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(fileHandler.Handle, path: "/Static"));
         }
 
         /// <summary>
