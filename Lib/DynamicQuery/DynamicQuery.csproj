@@ -12,11 +12,13 @@
     <AssemblyName>Dynamic</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject></StartupObject>
+    <StartupObject>
+    </StartupObject>
     <OutputPath>..\..\Builds\$(Configuration)</OutputPath>
     <IntermediateOutputPath>..\..\Builds\$(Configuration)\obj-$(AssemblyName)</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\Builds\$(Configuration)\obj-$(AssemblyName)</BaseIntermediateOutputPath>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
@@ -55,10 +57,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dynamic.cs" />
