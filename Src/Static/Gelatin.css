@@ -1,0 +1,51 @@
+﻿body {
+  margin: 0;
+  padding: 15pt 165pt 30pt 30pt;
+  background: gray;
+  font-family: Verdana, sans-serif;
+}
+
+div#mainbar, div#sidebar {
+  border: 1px solid black;
+  background: white;
+  border-radius: 5pt;
+  -moz-border-radius: 5pt;
+}
+
+div#mainbar {
+  min-width: 500pt;
+  max-width: 700pt;
+  padding: 0pt 12pt;
+}
+
+div#sidebar {
+  position: fixed;
+  top: 15pt;
+  right: 30pt;
+  width: 110pt;
+  padding: 5pt;
+  z-index: -1; /* make it disappear when too narrow */
+}
+
+div#header { border-bottom: 1px solid #888; }
+div#header h1 {
+  font-family: Georgia, serif;
+  text-align: center;
+  margin: 0.2em 0 0.3em;
+  padding: 0.2em 0 0;
+}
+
+div#footer {
+  text-align: center;
+  font-size: 80%;
+  padding: 0.3em;
+}
+
+
+ul, ol { padding-left: 1em; }
+
+hr { border: none; border-bottom: 1px solid #888; }
+
+a:hover { color: #d11; }
+
+tt, pre { font-size: 120%;  }
