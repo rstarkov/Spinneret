@@ -159,15 +159,15 @@ namespace RT.Spinneret
 
             try
             {
-                return HttpResponse.Create(page.Layout.GetPageHtml(page));
+                return HttpResponse.Html(page.Layout.GetPageHtml(page));
             }
             catch (PageErrorException exc)
             {
-                return HttpResponse.Create(page.Layout.GetErrorHtml(page, exc.Message), exc.Status);
+                return HttpResponse.Html(page.Layout.GetErrorHtml(page, exc.Message), exc.Status);
             }
             catch (Exception e)
             {
-                return HttpResponse.Create(page.Layout.GetExceptionHtml(page, e), HttpStatusCode._500_InternalServerError);
+                return HttpResponse.Html(page.Layout.GetExceptionHtml(page, e), HttpStatusCode._500_InternalServerError);
             }
         }
     }

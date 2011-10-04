@@ -78,7 +78,7 @@ namespace RT.Spinneret
                     }
                 }
                 if (cookies != null)
-                    return HttpResponse.Create(HttpStatusCode._302_Found, new HttpResponseHeaders()
+                    return HttpResponse.Empty(HttpStatusCode._302_Found, new HttpResponseHeaders()
                     {
                         SetCookie = cookies,
                         Location = Request.SameUrlWhere(key => !CookiableArgs.Contains(key))
