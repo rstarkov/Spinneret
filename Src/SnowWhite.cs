@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using RT.TagSoup;
-using RT.TagSoup.HtmlTags;
 using RT.Util.ExtensionMethods;
 
 namespace RT.Spinneret

@@ -146,7 +146,6 @@ namespace RT.Spinneret
         public override bool StartTag { get { return false; } }
         public override bool EndTag { get { return false; } }
         public override string TagName { get { return "RAWHTML"; } }
-        public override bool AllowXhtmlEmpty { get { return false; } }
 
         public override IEnumerable<string> ToEnumerable()
         {
