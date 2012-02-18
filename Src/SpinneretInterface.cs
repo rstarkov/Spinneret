@@ -17,6 +17,11 @@ namespace RT.Spinneret
         public HttpServer Server { get; private set; }
 
         /// <summary>
+        /// Gets the <see cref="UrlPathResolver"/> instance used by the web interface.
+        /// </summary>
+        public UrlPathResolver Resolver { get; private set; }
+
+        /// <summary>
         /// Gets/sets a default layout to be used for rendering pages. Individual pages can override this.
         /// </summary>
         public SpinneretLayout Layout { get; set; }
@@ -52,7 +57,8 @@ namespace RT.Spinneret
 
             try
             {
-                Server = new HttpServer(hsOptions);
+                Resolver = new UrlPathResolver();
+                Server = new HttpServer(hsOptions) { Handler = Resolver.Handle };
                 Server.StartListening(false);
                 _navLinksPages.Clear();
                 RegisterHandlers(fsOptions);
@@ -97,7 +103,7 @@ namespace RT.Spinneret
 
         /// <summary>
         /// Registers all http request handlers to be served by the web interface. Override to register
-        /// own handlers (via <see cref="Server.RequestHandlerHooks.Add"/>) or pages (via <see cref="RegisterPage"/>),
+        /// own handlers (via <see cref="Resolver.Add"/>) or pages (via <see cref="RegisterPage"/>),
         /// but remember to call the base method to register some shared handlers.
         /// </summary>
         public virtual void RegisterHandlers(FileSystemOptions fsOptions)
@@ -105,8 +111,8 @@ namespace RT.Spinneret
             if (fsOptions == null)
                 throw new ArgumentException("FileSystemOptions can't be null");
 
-            FileSystemHandler fileHandler = new FileSystemHandler("Static", fsOptions);
-            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(fileHandler.Handle, path: "/Static"));
+            var fileHandler = new FileSystemHandler("Static", fsOptions);
+            Resolver.Add(new UrlPathHook(fileHandler.Handle, path: "/Static"));
         }
 
         /// <summary>
@@ -135,7 +141,7 @@ namespace RT.Spinneret
         /// that request.</param>
         public void RegisterPage(string baseUrl, Func<HttpRequest, SpinneretPage> pageMaker)
         {
-            Server.RequestHandlerHooks.Add(new HttpRequestHandlerHook(path: baseUrl, specificPath: baseUrl.EndsWith("/"),
+            Resolver.Add(new UrlPathHook(path: baseUrl, specificPath: baseUrl.EndsWith("/"),
                 handler: request => handler_Page(request, pageMaker)));
         }
 
