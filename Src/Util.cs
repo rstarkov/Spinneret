@@ -129,30 +129,6 @@ namespace RT.Spinneret
         }
     }
 
-    public class RAWHTML : Tag
-    {
-        private IEnumerable<string> _content;
-
-        public RAWHTML(string content)
-        {
-            _content = new string[] { content };
-        }
-
-        public RAWHTML(IEnumerable<string> content)
-        {
-            _content = content;
-        }
-
-        public override bool StartTag { get { return false; } }
-        public override bool EndTag { get { return false; } }
-        public override string TagName { get { return "RAWHTML"; } }
-
-        public override IEnumerable<string> ToEnumerable()
-        {
-            return _content;
-        }
-    }
-
     public static class Throw
     {
         public static void IfArgumentNull(object arg, string argName)

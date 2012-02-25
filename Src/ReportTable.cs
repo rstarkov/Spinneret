@@ -339,11 +339,12 @@ namespace RT.Spinneret
         {
             initialise();
 
-            return new RAWHTML(getHtml());
+            return new RawTag(getHtml().JoinString());
         }
 
         public IEnumerable<string> getHtml()
         {
+#warning TODO: just yield return some tagsoup
             Ut.Tic();
             var enumerator = getRowsHtml().GetEnumerator();
             var any = enumerator.MoveNext();
