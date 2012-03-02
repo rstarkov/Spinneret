@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RT.Servers;
-using RT.TagSoup;
 using RT.Util;
 using RT.Util.ExtensionMethods;
 
