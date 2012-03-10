@@ -216,7 +216,7 @@ namespace RT.Spinneret
 
     public class ReportTableQueryable<T>
     {
-        private HttpRequest _request;
+        private UrlPathRequest _request;
         private IQueryable _items;
         private Dictionary<string, object> _externals;
         private bool _initialised = false;
@@ -242,7 +242,7 @@ namespace RT.Spinneret
         /// <param name="request">The request that this table is generated in response to. Used for constructing
         /// URLs for form action and possibly other items.</param>
         /// <param name="items">The collection of items to be made queryable.</param>
-        public ReportTableQueryable(HttpRequest request, IQueryable<T> items)
+        public ReportTableQueryable(UrlPathRequest request, IQueryable<T> items)
         {
             _request = request;
             _items = items;
@@ -256,7 +256,7 @@ namespace RT.Spinneret
         /// <param name="items">The collection of items to be made queryable.</param>
         /// <param name="externals">A collection of extra objects to be available under the specified names.
         /// Supported types: delegates returning a value; typeof(&lt;a-static-type&gt;).</param>
-        public ReportTableQueryable(HttpRequest request, IQueryable<T> items, Dictionary<string, object> externals)
+        public ReportTableQueryable(UrlPathRequest request, IQueryable<T> items, Dictionary<string, object> externals)
             : this(request, items)
         {
             _externals = externals;

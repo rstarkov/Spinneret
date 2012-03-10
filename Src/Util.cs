@@ -53,7 +53,7 @@ namespace RT.Spinneret
             return value;
         }
 
-        public static string SameUrlExcept(this HttpRequest request, Dictionary<string, string> qsAddOrReplace, string[] qsRemove, string resturl)
+        public static string SameUrlExcept(this UrlPathRequest request, Dictionary<string, string> qsAddOrReplace, string[] qsRemove, string resturl)
         {
             StringBuilder sb = new StringBuilder(request.BaseUrl);
             if (resturl == null)
@@ -93,7 +93,7 @@ namespace RT.Spinneret
             return sb.ToString();
         }
 
-        public static string SameUrlExceptSet(this HttpRequest request, params string[] qsAddOrReplace)
+        public static string SameUrlExceptSet(this UrlPathRequest request, params string[] qsAddOrReplace)
         {
             var dict = new Dictionary<string, string>();
             if ((qsAddOrReplace.Length & 1) == 1)
@@ -103,17 +103,17 @@ namespace RT.Spinneret
             return request.SameUrlExcept(dict, null, null);
         }
 
-        public static string SameUrlExceptRemove(this HttpRequest request, params string[] qsRemove)
+        public static string SameUrlExceptRemove(this UrlPathRequest request, params string[] qsRemove)
         {
             return request.SameUrlExcept(null, qsRemove, null);
         }
 
-        public static string SameUrlExceptSetRest(this HttpRequest request, string resturl)
+        public static string SameUrlExceptSetRest(this UrlPathRequest request, string resturl)
         {
             return request.SameUrlExcept(null, null, resturl);
         }
 
-        public static string SameUrlWhere(this HttpRequest request, Func<string, bool> predicate)
+        public static string SameUrlWhere(this UrlPathRequest request, Func<string, bool> predicate)
         {
             var qs = request.Get.Keys.Where(predicate).Select(key => request.Get[key].Select(val => key.UrlEscape() + "=" + val.UrlEscape()).JoinString("&")).JoinString("&");
             return request.UrlWithoutQuery + (qs == "" ? "" : "?" + qs);

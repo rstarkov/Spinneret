@@ -13,7 +13,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Stores the request that this page is the response to.
         /// </summary>
-        public readonly HttpRequest Request;
+        public readonly UrlPathRequest Request;
 
         /// <summary>
         /// Stores the web interface instance by which this request was created.
@@ -46,7 +46,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Constructs a page, storing a reference to the request that has caused it.
         /// </summary>
-        protected SpinneretPage(HttpRequest request, SpinneretInterface @interface)
+        protected SpinneretPage(UrlPathRequest request, SpinneretInterface @interface)
         {
             Request = request;
             Interface = @interface;

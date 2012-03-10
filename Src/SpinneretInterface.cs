@@ -124,7 +124,7 @@ namespace RT.Spinneret
         /// <param name="navLinkText">The text to use on the navigation link for this page.</param>
         /// <param name="pageMaker">A function taking a request and returning a new page instance for
         /// that request.</param>
-        public void RegisterPage(string baseUrl, string navLinkSection, string navLinkText, Func<HttpRequest, SpinneretPage> pageMaker)
+        public void RegisterPage(string baseUrl, string navLinkSection, string navLinkText, Func<UrlPathRequest, SpinneretPage> pageMaker)
         {
             Throw.IfArgumentNull(navLinkText, "navLinkText");
             Throw.IfArgumentNull(navLinkSection, "navLinkSection");
@@ -139,7 +139,7 @@ namespace RT.Spinneret
         /// the subpaths will not be handled; otherwise the path and all subpaths will use the page.</param>
         /// <param name="pageMaker">A function taking a request and returning a new page instance for
         /// that request.</param>
-        public void RegisterPage(string baseUrl, Func<HttpRequest, SpinneretPage> pageMaker)
+        public void RegisterPage(string baseUrl, Func<UrlPathRequest, SpinneretPage> pageMaker)
         {
             Resolver.Add(new UrlPathHook(path: baseUrl, specificPath: baseUrl.EndsWith("/"),
                 handler: request => handler_Page(request, pageMaker)));
@@ -154,7 +154,7 @@ namespace RT.Spinneret
             return request.OriginIP.Address.ToString() == "127.0.0.1";
         }
 
-        private HttpResponse handler_Page(HttpRequest request, Func<HttpRequest, SpinneretPage> pageMaker)
+        private HttpResponse handler_Page(UrlPathRequest request, Func<UrlPathRequest, SpinneretPage> pageMaker)
         {
             if (!ValidateAccessRights(request))
                 return HttpResponse.Error(HttpStatusCode._403_Forbidden);
