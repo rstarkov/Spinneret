@@ -59,7 +59,7 @@ namespace RT.Spinneret
             {
                 Resolver = new UrlPathResolver();
                 Server = new HttpServer(hsOptions) { Handler = Resolver.Handle };
-                Server.StartListening(false);
+                Server.StartListening();
                 _navLinksPages.Clear();
                 RegisterHandlers(fsOptions);
             }
@@ -79,8 +79,7 @@ namespace RT.Spinneret
         {
             if (Server == null)
                 return;
-            if (Server.IsListeningThreadActive)
-                Server.StopListening(true);
+            Server.StopListening(true);
             Server = null;
         }
 
@@ -89,7 +88,7 @@ namespace RT.Spinneret
         /// </summary>
         public bool ServerRunning
         {
-            get { return Server != null && Server.IsListeningThreadActive; }
+            get { return Server != null && Server.IsListening; }
         }
 
         /// <summary>
