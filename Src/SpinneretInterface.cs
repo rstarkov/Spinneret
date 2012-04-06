@@ -150,7 +150,7 @@ namespace RT.Spinneret
         /// </summary>
         public virtual bool ValidateAccessRights(HttpRequest request)
         {
-            return request.OriginIP.Address.ToString() == "127.0.0.1";
+            return System.Net.IPAddress.IsLoopback(request.ClientIPAddress);
         }
 
         private HttpResponse handler_Page(UrlPathRequest request, Func<UrlPathRequest, SpinneretPage> pageMaker)
