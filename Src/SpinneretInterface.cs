@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RT.Servers;
+using RT.Util;
 using RT.Util.Dialogs;
 using RT.Util.ExtensionMethods;
 
@@ -110,7 +111,7 @@ namespace RT.Spinneret
             if (fsOptions == null)
                 throw new ArgumentException("FileSystemOptions can't be null");
 
-            var fileHandler = new FileSystemHandler("Static", fsOptions);
+            var fileHandler = new FileSystemHandler(PathUtil.AppPathCombine("Static"), fsOptions);
             Resolver.Add(new UrlPathHook(fileHandler.Handle, path: "/Static"));
         }
 
