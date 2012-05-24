@@ -157,7 +157,7 @@ namespace RT.Spinneret
         private HttpResponse handler_Page(UrlPathRequest request, Func<UrlPathRequest, SpinneretPage> pageMaker)
         {
             if (!ValidateAccessRights(request))
-                return HttpResponse.Error(HttpStatusCode._403_Forbidden);
+                throw new HttpException(HttpStatusCode._403_Forbidden);
 
             var page = pageMaker(request);
             var response = page.ParseArgs();
