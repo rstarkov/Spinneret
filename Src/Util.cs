@@ -116,7 +116,7 @@ namespace RT.Spinneret
         public static string SameUrlWhere(this UrlPathRequest request, Func<string, bool> predicate)
         {
             var qs = request.Get.Keys.Where(predicate).Select(key => request.Get[key].Select(val => key.UrlEscape() + "=" + val.UrlEscape()).JoinString("&")).JoinString("&");
-            return request.UrlWithoutQuery + (qs == "" ? "" : "?" + qs);
+            return request.OriginalUrlWithoutQuery + (qs == "" ? "" : "?" + qs);
         }
     }
 
