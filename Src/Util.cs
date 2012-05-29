@@ -57,7 +57,7 @@ namespace RT.Spinneret
         {
             StringBuilder sb = new StringBuilder(request.BaseUrl);
             if (resturl == null)
-                sb.Append(request.RestUrlWithoutQuery);
+                sb.Append(request.UrlWithoutQuery);
             else
                 sb.Append(resturl);
             char sep = '?';
