@@ -216,7 +216,7 @@ namespace RT.Spinneret
 
     public class ReportTableQueryable<T>
     {
-        private UrlPathRequest _request;
+        private HttpRequest _request;
         private IQueryable _items;
         private Dictionary<string, object> _externals;
         private bool _initialised = false;
@@ -242,7 +242,7 @@ namespace RT.Spinneret
         /// <param name="request">The request that this table is generated in response to. Used for constructing
         /// URLs for form action and possibly other items.</param>
         /// <param name="items">The collection of items to be made queryable.</param>
-        public ReportTableQueryable(UrlPathRequest request, IQueryable<T> items)
+        public ReportTableQueryable(HttpRequest request, IQueryable<T> items)
         {
             _request = request;
             _items = items;
@@ -256,7 +256,7 @@ namespace RT.Spinneret
         /// <param name="items">The collection of items to be made queryable.</param>
         /// <param name="externals">A collection of extra objects to be available under the specified names.
         /// Supported types: delegates returning a value; typeof(&lt;a-static-type&gt;).</param>
-        public ReportTableQueryable(UrlPathRequest request, IQueryable<T> items, Dictionary<string, object> externals)
+        public ReportTableQueryable(HttpRequest request, IQueryable<T> items, Dictionary<string, object> externals)
             : this(request, items)
         {
             _externals = externals;
@@ -275,10 +275,10 @@ namespace RT.Spinneret
             var cols_name = UrlPrefix + "cols";
             var where_name = UrlPrefix + "where";
             var orderby_name = UrlPrefix + "orderby";
-            var cols_val = _request.Get.ContainsKey(cols_name) ? _request.Get[cols_name].Value : DefaultCols;
-            var where_val = _request.Get.ContainsKey(where_name) ? _request.Get[where_name].Value : DefaultWhere;
-            var orderby_val = _request.Get.ContainsKey(orderby_name) ? _request.Get[orderby_name].Value : DefaultOrderBy;
-            var action = _request.SameUrlWhere(key => key != cols_name && key != where_name && key != orderby_name);
+            var cols_val = _request.Url[cols_name] ?? DefaultCols;
+            var where_val = _request.Url[where_name] ?? DefaultWhere;
+            var orderby_val = _request.Url[orderby_name] ?? DefaultOrderBy;
+            var action = _request.Url.Where(key => key != cols_name && key != where_name && key != orderby_name).ToHref();
 
             foreach (var col_def in cols_val.Split(';').Select(str => str.Trim()))
             {

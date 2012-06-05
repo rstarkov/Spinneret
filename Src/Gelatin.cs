@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RT.Servers;
 using RT.TagSoup;
 using RT.Util.ExtensionMethods;
 
@@ -82,7 +83,7 @@ namespace RT.Spinneret
 
         protected virtual IEnumerable<A> GetFloatingLinks(SpinneretPage page)
         {
-            yield return new A("Full screen") { href = page.Request.SameUrlExceptSet("FullScreen", "true") };
+            yield return new A("Full screen") { href = page.Request.Url.WithQuery("FullScreen", "true").ToHref() };
         }
 
         protected virtual string FormatHtmlTitle(string title)

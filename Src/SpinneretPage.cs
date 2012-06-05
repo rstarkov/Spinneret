@@ -13,7 +13,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Stores the request that this page is the response to.
         /// </summary>
-        public readonly UrlPathRequest Request;
+        public readonly HttpRequest Request;
 
         /// <summary>
         /// Stores the web interface instance by which this request was created.
@@ -46,7 +46,7 @@ namespace RT.Spinneret
         /// <summary>
         /// Constructs a page, storing a reference to the request that has caused it.
         /// </summary>
-        protected SpinneretPage(UrlPathRequest request, SpinneretInterface @interface)
+        protected SpinneretPage(HttpRequest request, SpinneretInterface @interface)
         {
             Request = request;
             Interface = @interface;
@@ -68,10 +68,10 @@ namespace RT.Spinneret
                 List<Cookie> cookies = null;
                 foreach (var arg in CookiableArgs)
                 {
-                    if (Request.Get.ContainsKey(arg))
+                    var argval = Request.Url[arg];
+                    if (argval != null)
                     {
                         if (cookies == null) cookies = new List<Cookie>();
-                        var argval = Request.Get[arg].Value;
                         var mustBe = ValidateCookiable(arg, argval);
                         if (mustBe != null) throw new ValidationException(arg, argval, mustBe);
                         cookies.Add(new Cookie() { Name = arg, Value = argval, Path = "/" });
@@ -81,7 +81,7 @@ namespace RT.Spinneret
                     return HttpResponse.Empty(HttpStatusCode._302_Found, new HttpResponseHeaders()
                     {
                         SetCookie = cookies,
-                        Location = Request.SameUrlWhere(key => !CookiableArgs.Contains(key))
+                        Location = Request.Url.Where(name => !CookiableArgs.Contains(name)).ToHref(),
                     });
             }
 
