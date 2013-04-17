@@ -98,7 +98,7 @@ namespace RT.Spinneret
         /// </summary>
         public int ServerPort
         {
-            get { return Server.Options.Port; }
+            get { return Server.Options.Port.Value; }
         }
 
         /// <summary>
