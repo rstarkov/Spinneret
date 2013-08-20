@@ -18,9 +18,9 @@ namespace RT.Spinneret
         public HttpServer Server { get; private set; }
 
         /// <summary>
-        /// Gets the <see cref="UrlPathResolver"/> instance used by the web interface.
+        /// Gets the <see cref="UrlResolver"/> instance used by the web interface.
         /// </summary>
-        public UrlPathResolver Resolver { get; private set; }
+        public UrlResolver Resolver { get; private set; }
 
         /// <summary>
         /// Gets/sets a default layout to be used for rendering pages. Individual pages can override this.
@@ -58,7 +58,7 @@ namespace RT.Spinneret
 
             try
             {
-                Resolver = new UrlPathResolver();
+                Resolver = new UrlResolver();
                 Server = new HttpServer(hsOptions) { Handler = Resolver.Handle };
                 Server.StartListening();
                 _navLinksPages.Clear();
@@ -112,7 +112,7 @@ namespace RT.Spinneret
                 throw new ArgumentException("FileSystemOptions can't be null");
 
             var fileHandler = new FileSystemHandler(PathUtil.AppPathCombine("Static"), fsOptions);
-            Resolver.Add(new UrlPathHook(fileHandler.Handle, path: "/Static"));
+            Resolver.Add(new UrlMapping(fileHandler.Handle, path: "/Static"));
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace RT.Spinneret
         /// that request.</param>
         public void RegisterPage(string baseUrl, Func<HttpRequest, SpinneretPage> pageMaker)
         {
-            Resolver.Add(new UrlPathHook(path: baseUrl, specificPath: baseUrl.EndsWith("/"),
+            Resolver.Add(new UrlMapping(path: baseUrl, specificPath: baseUrl.EndsWith("/"),
                 handler: request => handler_Page(request, pageMaker)));
         }
 
