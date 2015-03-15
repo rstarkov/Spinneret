@@ -69,7 +69,7 @@ namespace RT.Spinneret
                 try { Server.StopListening(true); }
                 catch { }
                 Server = null;
-                DlgMessage.ShowWarning("The server could not be started. Try a different port (current port is {0}).".Fmt(hsOptions.Port));
+                DlgMessage.ShowWarning("The server could not be started. Try a different port (current port is {0}).".Fmt(hsOptions.Endpoints.JoinString()));
             }
         }
 
@@ -98,7 +98,7 @@ namespace RT.Spinneret
         /// </summary>
         public int ServerPort
         {
-            get { return Server.Options.Port.Value; }
+            get { return Server.Options.Endpoints["main"].Port; }
         }
 
         /// <summary>
