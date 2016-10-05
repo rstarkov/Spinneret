@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -32,6 +32,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RT.Servers, Version=1.0.1614.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\AccountsWeb\packages\RT.Servers.1.0.1614\lib\net45\RT.Servers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RT.TagSoup, Version=1.0.1610.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\AccountsWeb\packages\RT.TagSoup.1.0.1610.0\lib\net40-Client\RT.TagSoup.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RT.Util, Version=1.0.1542.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\AccountsWeb\packages\RT.Util.1.0.1542\lib\net40-client\RT.Util.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -46,26 +58,17 @@
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RT.Servers\Src\RT.Servers.csproj">
-      <Project>{A7333C19-56A9-4A8E-A196-7648666EF26A}</Project>
-      <Name>Servers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.TagSoup\Src\RT.TagSoup.csproj">
-      <Project>{8F80D916-8999-45D8-ACB2-FFA7E2698FD6}</Project>
-      <Name>TagSoup</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lib\DynamicQuery\DynamicQuery.csproj">
       <Project>{F285CEB0-4108-440C-AD94-1C1A7C159D7C}</Project>
       <Name>DynamicQuery</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\RT.Util\Src\RT.Util.csproj">
-      <Project>{8D0FE79C-AD8D-475C-9E6F-9CAE85365B5D}</Project>
-      <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Static\Gelatin.css" />
     <Content Include="Static\SnowWhite.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
