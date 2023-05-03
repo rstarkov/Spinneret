@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RT.Servers;
 using RT.Util;
@@ -126,7 +127,7 @@ namespace RT.Spinneret
     /// This exception can be thrown by page generation code to indicate an error that is caused by
     /// and can be rectified by the user. For any technical errors a different exception should be thrown.
     /// </summary>
-    public class PageErrorException : RTException
+    public class PageErrorException : Exception
     {
         public HttpStatusCode Status { get; private set; }
 

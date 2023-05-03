@@ -1,85 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E0EA5785-4ECC-4BD2-8C26-753B53203C4A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RT.Spinneret</RootNamespace>
-    <AssemblyName>RT.Spinneret</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <OutputPath>..\Builds\$(Configuration)</OutputPath>
-    <IntermediateOutputPath>..\Builds\$(Configuration)\obj-$(AssemblyName)</IntermediateOutputPath>
-    <BaseIntermediateOutputPath>..\Builds\$(Configuration)\obj-$(AssemblyName)</BaseIntermediateOutputPath>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFramework>net4.8</TargetFramework>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="RT.Servers, Version=1.0.1614.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\AccountsWeb\packages\RT.Servers.1.0.1614\lib\net45\RT.Servers.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RT.TagSoup, Version=1.0.1610.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\AccountsWeb\packages\RT.TagSoup.1.0.1610.0\lib\net40-Client\RT.TagSoup.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="RT.Util, Version=1.0.1542.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\AccountsWeb\packages\RT.Util.1.0.1542\lib\net40-client\RT.Util.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
+    <PackageReference Include="RT.Servers" Version="1.0.1685" />
+    <PackageReference Include="RT.TagSoup" Version="1.0.1633" />
+    <PackageReference Include="RT.Util" Version="2.0.1737" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Gelatin.cs" />
-    <Compile Include="NavLink.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportTable.cs" />
-    <Compile Include="SnowWhite.cs" />
-    <Compile Include="SpinneretInterface.cs" />
-    <Compile Include="SpinneretLayout.cs" />
-    <Compile Include="SpinneretPage.cs" />
-    <Compile Include="Util.cs" />
+    <ProjectReference Include="..\Lib\DynamicQuery\DynamicQuery.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Lib\DynamicQuery\DynamicQuery.csproj">
-      <Project>{F285CEB0-4108-440C-AD94-1C1A7C159D7C}</Project>
-      <Name>DynamicQuery</Name>
-    </ProjectReference>
+    <Content Include="Static\**" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Static\Gelatin.css" />
-    <Content Include="Static\SnowWhite.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>cd $(ProjectDir)
-xcopy /y /i $(ProjectDir)Static\* $(TargetDir)Static\</PostBuildEvent>
-  </PropertyGroup>
+
 </Project>

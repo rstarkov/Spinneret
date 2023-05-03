@@ -1321,7 +1321,7 @@ namespace System.Linq.Dynamic
                             id, GetTypeName(type));
                     case 1:
                         MethodInfo method = (MethodInfo) mb;
-                        if (!IsPredefinedType(method.DeclaringType) && !externals.Values.Any(ext => ext == method.DeclaringType))
+                        if (!IsPredefinedType(method.DeclaringType) && !externals.Values.Any(ext => (Type) ext == method.DeclaringType))
                             throw ParseError(errorPos, Res.MethodsAreInaccessible, GetTypeName(method.DeclaringType));
                         if (method.ReturnType == typeof(void))
                             throw ParseError(errorPos, Res.MethodIsVoid,

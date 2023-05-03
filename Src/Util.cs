@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using RT.Serialization;
 using RT.Servers;
-using RT.Util;
 using RT.Util.ExtensionMethods;
 
 namespace RT.Spinneret
@@ -56,11 +53,11 @@ namespace RT.Spinneret
         }
     }
 
-    public class ValidationException : RTException
+    public class ValidationException : Exception
     {
         public ValidationException(string varName, string varValue, string mustBe)
+            : base("The value of parameter \"{0}\", \"{1}\", is not valid. It must be {2}.".Fmt(varName, varValue, mustBe))
         {
-            _message = "The value of parameter \"{0}\", \"{1}\", is not valid. It must be {2}.".Fmt(varName, varValue, mustBe);
         }
     }
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using RT.Servers;
 using RT.Util;
-using RT.Util.Dialogs;
 using RT.Util.ExtensionMethods;
+using RT.Util.Forms;
 
 namespace RT.Spinneret
 {

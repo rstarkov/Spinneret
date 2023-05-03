@@ -5,6 +5,7 @@ using System.Linq.Dynamic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using RT.Serialization;
 using RT.Servers;
 using RT.TagSoup;
 using RT.Util;
