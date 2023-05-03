@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net4.8</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="RT.Servers" Version="1.0.1685" />
     <PackageReference Include="RT.TagSoup" Version="1.0.1633" />
-    <PackageReference Include="RT.Util" Version="2.0.1737" />
+    <PackageReference Include="RT.Util" Version="2.0.1739" />
   </ItemGroup>
 
   <ItemGroup>
