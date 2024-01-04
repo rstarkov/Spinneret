@@ -1,12 +1,10 @@
-﻿using System;
-using RT.TagSoup;
+﻿using RT.TagSoup;
 
-namespace RT.Spinneret
+namespace RT.Spinneret;
+
+public abstract class SpinneretLayout
 {
-    public abstract class SpinneretLayout
-    {
-        public abstract Tag GetPageHtml(SpinneretPage page);
-        public abstract Tag GetErrorHtml(SpinneretPage page, string message);
-        public abstract Tag GetExceptionHtml(SpinneretPage page, Exception exception);
-    }
+    public abstract Tag GetPageHtml(SpinneretPage page);
+    public abstract Tag GetErrorHtml(SpinneretPage page, string message);
+    public abstract Tag GetExceptionHtml(SpinneretPage page, Exception exception);
 }
