@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RT.Servers" Version="1.0.1689" />
-    <PackageReference Include="RT.TagSoup" Version="1.0.1634" />
-    <PackageReference Include="RT.Util" Version="2.0.1764" />
+    <PackageReference Include="RT.Servers" Version="1.1.509" />
+    <PackageReference Include="RT.TagSoup" Version="1.1.52" />
+    <PackageReference Include="RT.Util" Version="2.0.1776" />
   </ItemGroup>
 
   <ItemGroup>
